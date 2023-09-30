@@ -3,3 +3,32 @@ title: "p8105_hw2_tw2918_01"
 output: github_document
 date: "2023-09-30"
 ---
+
+```{r}
+library(tidyverse)
+```
+
+# Probelm 1
+## 1. Clean the data in pols-month.csv.
+### (1) Use `separate()` to break up the variable `mon` into integer variables `year`, `month`, and `day`
+
+### (2)  replace month number with month abbreviation
+
+### (3) create a `president` variable taking values `gop` and `dem`, and remove `prez_dem` and `prez_gop`
+
+### (4) remove `day` variable 
+
+```{r, eval=FALSE}
+pols_month_df = 
+  read_csv("./fivethirtyeight_datasets/pols-month.csv")|>
+  janitor::clean_names()|>
+  separate(mon, into = c("year", "month", "day"))|>
+  mutate(month = month.abb[as.numeric(month)])|>
+  relocate(year, month, day, prez_gop, prez_dem) |>
+  pivot_longer(
+    prez_gop: prez_dem,
+    names_to= "president",
+    names_prefix = "prez_",
+  )|>
+  select(-value, -day)
+```
