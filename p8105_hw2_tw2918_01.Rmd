@@ -91,7 +91,9 @@ mr_trashwheel_df =
   mutate(
     homes_powered_new = weight_tons*500/30,
     trash_wheel="mr_trash_wheel",
-    year=as.numeric(year))
+    year=as.numeric(year)
+    ) |>
+  select(trash_wheel, everything(), -homes_powered)
 ```
 
 ## 2. Use a similar process to import, clean, and organize the data for Professor Trash Wheel
@@ -105,7 +107,8 @@ pf_trashwheel_df =
   janitor::clean_names()|>
   mutate(
     homes_powered_new = weight_tons*500/30,
-    trash_wheel = "professor_trash_wheel")
+    trash_wheel = "professor_trash_wheel") |>
+  select(trash_wheel, everything(), -homes_powered)
 ```
 
 ## 3. Use a similar process to import, clean, and organize the data for Gwynnda Trash Wheel
@@ -119,7 +122,8 @@ gwy_trashwheel_df=
   janitor::clean_names()|>
   mutate(
     homes_powered_new = weight_tons*500/30,
-    trash_wheel = "gwynnda_trash_wheel")
+    trash_wheel = "gwynnda_trash_wheel") |>
+  select(trash_wheel, everything(), -homes_powered)
 ```
 
 ## 4 Combine Datasets 
@@ -135,5 +139,6 @@ mr_pf_trashwheel_df =
 trashwheel_df = 
   full_join(mr_pf_trashwheel_df, gwy_trashwheel_df)
 ```
+
 
 
