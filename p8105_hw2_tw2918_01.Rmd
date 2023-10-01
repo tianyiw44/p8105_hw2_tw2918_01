@@ -4,8 +4,13 @@ output: github_document
 date: "2023-09-30"
 ---
 
-```{r}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, message = FALSE)
+```
+
+```{r load_libraries}
 library(tidyverse)
+library(readxl)
 ```
 
 # Probelm 1
@@ -19,18 +24,21 @@ library(tidyverse)
 ### (4) remove `day` variable 
 
 ```{r, eval=FALSE}
+month_df = 
+  tibble(
+    month_num = 1:12,
+    month_abb = month.abb,
+    month = month.name
+  )
+
 pols_month_df = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv")|>
   janitor::clean_names()|>
   separate(mon, into = c("year", "month", "day"))|>
-  mutate(month = month.abb[as.numeric(month)])|>
-  relocate(year, month, day, prez_gop, prez_dem) |>
-  pivot_longer(
-    prez_gop: prez_dem,
-    names_to= "president",
-    names_prefix = "prez_",
-  )|>
-  select(-value, -day)
+  mutate(
+    president = recode(prez_gop, "0" = "dem", "1" = "gop", "2" = "gop")) |>
+  left_join(x = _, y = month_df) |> 
+  select(year, month, everything(), -day, -starts_with("prez")) 
 ```
 
 ## 2. clean the data in snp.csv using a similar process to the above
@@ -45,6 +53,6 @@ snp_df =
   separate(date, into = c("month", "day", "year"))|>
   select(-day)|>
   mutate(month = month.abb[as.numeric(month)])|>
-  arrange(year, month)|>
+  arrange(year)|>
   relocate(year, month,close)
 ```
