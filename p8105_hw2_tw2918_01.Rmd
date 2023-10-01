@@ -78,4 +78,18 @@ unemp_df =
 ```{r}
 ```
 
+# Probelm 2 
+## 1. Read and Clearn Mr. Trash Wheel Dataset
+
+```{r}
+mr_trashwheel_df = 
+  read_excel(
+    "./202207 Trash Wheel Collection Data.xlsx", 
+    sheet = "Mr. Trash Wheel",
+    range = "A2:N549"
+    ) |>
+  janitor::clean_names()
+
+```
+
 
