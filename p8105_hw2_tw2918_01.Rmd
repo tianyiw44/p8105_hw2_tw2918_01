@@ -76,10 +76,6 @@ unemp_df =
 ## 4. Join the datasets by merging `snp` into `pols`, and merging `unemployment` into the result
 
 ```{r}
-pols_snp_unemp_df = 
-  left_join(pols_month_df, snp_df)|>
-  left_join(x = _, y = unemp_df)
-
-str(pols_snp_unemp_df)
 ```
+
 
