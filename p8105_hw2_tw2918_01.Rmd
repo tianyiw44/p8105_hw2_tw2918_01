@@ -34,11 +34,11 @@ month_df =
 pols_month_df = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv")|>
   janitor::clean_names()|>
-  separate(mon, into = c("year", "month", "day"))|>
+  separate(mon, into = c("year", "month_num", "day"), convert = TRUE)|>
   mutate(
     president = recode(prez_gop, "0" = "dem", "1" = "gop", "2" = "gop")) |>
   left_join(x = _, y = month_df) |> 
-  select(year, month, everything(), -day, -starts_with("prez")) 
+  select(year, month, everything(), -day, -starts_with("prez"))
 ```
 
 ## 2. clean the data in snp.csv using a similar process to the above
@@ -52,6 +52,21 @@ snp_df =
   janitor::clean_names()|>
   separate(date, into = c("month", "day", "year"), convert = TRUE) |>
   arrange(year, month)|>
-  mutate(month = month.abb[as.numeric(month)])|>
+  mutate(month = month.name[as.numeric(month)])|>
   select(year, month,close)
+```
+
+## 3. tidy the unemployment data
+
+```{r, eval=FALSE}
+unemp_df = 
+  read_csv("./fivethirtyeight_datasets/unemployment.csv")|>
+  janitor::clean_names()|>
+  pivot_longer(
+    jan:dec,
+    names_to = "month_abb",
+    values_to = "unemployment" 
+  )|>
+    left_join(x = _, y = month_df) |> 
+    select(year, month, unemployment)
 ```
