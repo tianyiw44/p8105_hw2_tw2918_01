@@ -50,9 +50,8 @@ pols_month_df =
 snp_df = 
   read_csv("./fivethirtyeight_datasets/snp.csv")|>
   janitor::clean_names()|>
-  separate(date, into = c("month", "day", "year"))|>
-  select(-day)|>
+  separate(date, into = c("month", "day", "year"), convert = TRUE) |>
+  arrange(year, month)|>
   mutate(month = month.abb[as.numeric(month)])|>
-  arrange(year)|>
-  relocate(year, month,close)
+  select(year, month,close)
 ```
