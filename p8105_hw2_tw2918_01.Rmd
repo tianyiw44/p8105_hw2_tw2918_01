@@ -173,3 +173,15 @@ baseline_df =
 * The average baseline age is `r mean(baseline_df$current_age)`
 * `r nrow(filter(baseline_df, sex=="female"& apoe4=="carrier")) / nrow(filter(baseline_df, sex== "female")) * 100`% of women in the study are APOE4 carriers
 
+## 3.  Import, clean, and tidy the dataset of longitudinally observed biomarker values
+
+```{r}
+long_biomaker_df = 
+  read_csv("./data_mci/mci_amyloid.csv", skip=1) |>
+  janitor::clean_names()|>
+  rename(id = study_id)
+```
+
+
+
+
