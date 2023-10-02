@@ -146,7 +146,7 @@ The `trashwheel_df` dataset contains data from all three dataset, Mr.Trash Wheel
 For available data, the total weight of trash collected by Professor Trash Wheel is `r sum(pull(pf_trashwheel_df, weight_tons))`. The total number of cigarette butts collected by Gwynnda in July of 2021 is `r sum(pull(filter(gwy_trashwheel_df, month == "July" & year == "2021"), cigarette_butts))`. 
 
 # Probelm 3
-## 1. Import, clean, and tidy the dataset of baseline demographics。
+## 1. Import, clean, and tidy the dataset of baseline demographics
 
 ```{r}
 baseline_df = 
@@ -159,4 +159,17 @@ baseline_df =
   ) |>
   filter(is.na(age_at_onset)|age_at_onset>current_age)
 ```
+
+## 2. Discuss important steps in the import process and relevant features of the dataset
+
+* when using `read_csv` to import data, I used skip=1 to skip the first row. The first row is descriptions of the variables
+* used `janitor::clean_names` to tidy variable names
+* used the `mutat`e` function to replace  `sex` value from `0`,`1` to `female` and `male`
+* used the `mutate` function to replace `apoe4` value from `0`,`1` to `non_carrier` and `carrier`
+* used `mutate` function to replace missing value of `age_at_onset` from `.` to `NA`
+* used `filter` function to select and exact only the rows that meet the stated inclusion criteria, no MCI at baseline, which is either a missing value of `age_at_onset` or when `age_at_onset` is larger than `current_age` at baseline
+* There were `r nrow(baseline_df)` participants recruited
+* Of those recruited, `r sum(!is.na(pull(baseline_df, age_at_onset)))` developed MCI
+* The average baseline age is `r mean(baseline_df$current_age)`
+* `r nrow(filter(baseline_df, sex=="female"& apoe4=="carrier")) / nrow(filter(baseline_df, sex== "female")) * 100`% of women in the study are APOE4 carriers
 
