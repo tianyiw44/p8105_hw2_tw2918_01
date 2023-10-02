@@ -193,4 +193,20 @@ long_biomaker_df =
 * The average `baseline` time in years when biomaker amyloid is measured is `r mean(long_biomaker_df$baseline, na.rm=TRUE)`
 * The average 2nd time in year when biomaker amyloid is measured is `r mean(long_biomaker_df$time_2, na.rm=TRUE)`, 4th time is `r mean(long_biomaker_df$time_4, na.rm=TRUE)`, 6th time is `r mean(long_biomaker_df$time_6, na.rm=TRUE)` and 8th time is `r mean(long_biomaker_df$time_8, na.rm=TRUE)`
 
+## 5. Check whether some participants appear in only the baseline or amyloid datasets, and comment on your findings
+
+```{r}
+
+```
+
+## 6. Combine the demographic and biomarker datasets so that only participants who appear in both datasets are retained and briefly describe the resulting dataset
+
+```{r}
+mci_demographic_biomaker_df = 
+  inner_join(baseline_df, long_biomaker_df)
+```
+
+* used `inner_join` to only keep participants who appear in both datasets
+* the resuiting dataset `mci_demographic_biomaker_df` contains `r nrow(mci_demographic_biomaker_df)`observations and`r ncol(mci_demographic_biomaker_df)` variables
+* The variables contains baseline character of the participants including baseline age (`current_age`), `sex`, years of `education`, wheter they carry `apoe4` and mci `age_at_onset`. It also contains biomaker amyloid measurement time at `baseline`, second, forth, sixth and eighth time visit, named as `baseline`, `time_2`, `time_4`, `time_6` and `time_8`. 
 
