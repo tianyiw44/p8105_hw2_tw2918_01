@@ -140,5 +140,10 @@ trashwheel_df =
   full_join(mr_pf_trashwheel_df, gwy_trashwheel_df)
 ```
 
+## 5 Write a paragraph about the data
+The `trashwheel_df` dataset contains data from all three dataset, Mr.Trash Wheel, Professor Trash Wheel and Gwynnda Trash Wheel. It contains `r nrow(trashwheel_df)` observations of trash collected. The data contains `r ncol(trashwheel_df)` variables. The variables include `month` `year` and `date` of the collected `dumspter`, weight of the `dumspter`, measured in tons (`weight_ton`), volume of the `dumspter`, measured in cubic yards (`volume_cubic_yards`) and the type of trash collected, such as `plastic_bottle`, `polysyrene`, `ciagrette_butt`, `glass_bottle`,`grocery_bags`, `chip_bags`, `sports_ball` and `plastic_bags`.There are missing values because each trash wheel collects different types of trash and the combination creates missing values for the type of trash they don't collect. The last variable `homes_powered_new` is number of homes powered by the collected trash, calculated using`weight_ton` times 500 kilowatts of electricity creates per ton, then divided by 30 kilowatts needed per home.
 
+For available data, the total weight of trash collected by Professor Trash Wheel is `r sum(pull(pf_trashwheel_df, weight_tons))`. The total number of cigarette butts collected by Gwynnda in July of 2021 is `r sum(pull(filter(gwy_trashwheel_df, month == "July" & year == "2021"), cigarette_butts))`. 
+
+# Probelm 3
 
