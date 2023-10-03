@@ -83,9 +83,9 @@ unemp_df =
 
 ```{r}
 mr_trashwheel_df = 
-  read_excel( "./202207 Trash Wheel Collection Data.xlsx", 
+  read_excel( "./202309 Trash Wheel Collection Data.xlsx", 
     sheet = "Mr. Trash Wheel",
-    range = "A2:N549"
+    range = "A2:N586"
     ) |>
   janitor::clean_names()|>
   mutate(
@@ -100,9 +100,9 @@ mr_trashwheel_df =
 
 ```{r}
 pf_trashwheel_df = 
-  read_excel( "./202207 Trash Wheel Collection Data.xlsx", 
+  read_excel( "./202309 Trash Wheel Collection Data.xlsx", 
     sheet = "Professor Trash Wheel",
-    range = "A2:M96"
+    range = "A2:M108"
     ) |>
   janitor::clean_names()|>
   mutate(
@@ -115,9 +115,9 @@ pf_trashwheel_df =
 
 ```{r}
 gwy_trashwheel_df=
-  read_excel( "./202207 Trash Wheel Collection Data.xlsx", 
+  read_excel( "./202309 Trash Wheel Collection Data.xlsx", 
     sheet = "Gwynnda Trash Wheel",
-    range = "A2:K108"
+    range = "A2:L157"
     ) |>
   janitor::clean_names()|>
   mutate(
