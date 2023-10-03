@@ -195,10 +195,8 @@ long_biomaker_df =
 
 ## 5. Check whether some participants appear in only the baseline or amyloid datasets, and comment on your findings
 
-```{r}
-
-```
-
+There are `r nrow(baseline_df)` observations in the baseline dataset, and  `r nrow(long_biomaker_df)` in the amyloid dateset. The amloid dataset has `r nrow(long_biomaker_df) - nrow(baseline_df)` more observations than the baseline. Therefore, there must be some participants that appear in only the the biomaker dataset. 
+ 
 ## 6. Combine the demographic and biomarker datasets so that only participants who appear in both datasets are retained and briefly describe the resulting dataset
 
 ```{r}
