@@ -23,7 +23,7 @@ library(readxl)
 
 ### (4) remove `day` variable 
 
-```{r, eval=FALSE}
+```{r}
 month_df = 
   tibble(
     month_num = 1:12,
@@ -32,7 +32,7 @@ month_df =
   )
 ```
 
-```{r, eval=FALSE}
+```{r}
 pols_month_df = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv")|>
   janitor::clean_names()|>
@@ -48,7 +48,7 @@ pols_month_df =
 ### (2)  replace month number with month abbreviation and remove `day` varialbe
 ### (3)  arrange according to year and month
 
-```{r, eval=FALSE}
+```{r}
 snp_df = 
   read_csv("./fivethirtyeight_datasets/snp.csv")|>
   janitor::clean_names()|>
@@ -60,7 +60,7 @@ snp_df =
 
 ## 3. tidy the unemployment data
 
-```{r, eval=FALSE}
+```{r}
 unemp_df = 
   read_csv("./fivethirtyeight_datasets/unemployment.csv")|>
   rename(year = Year) |>
@@ -75,7 +75,12 @@ unemp_df =
 
 ## 4. Join the datasets by merging `snp` into `pols`, and merging `unemployment` into the result
 
-```{r}
+```{r merge_538}
+data_538 = 
+  left_join(pols_month_df, snp_df) |>
+  left_join(x = _, y = unemp_df)
+
+str(data_538)
 ```
 
 # Probelm 2 
@@ -191,7 +196,6 @@ long_biomaker_df =
 * used `rename` function to rename study_id to id to make it consistant with `baseline_df`
 * There were `r nrow(long_biomaker_df)` participants in this dataset
 * The average `baseline` time in years when biomaker amyloid is measured is `r mean(long_biomaker_df$baseline, na.rm=TRUE)`
-* The average 2nd time in year when biomaker amyloid is measured is `r mean(long_biomaker_df$time_2, na.rm=TRUE)`, 4th time is `r mean(long_biomaker_df$time_4, na.rm=TRUE)`, 6th time is `r mean(long_biomaker_df$time_6, na.rm=TRUE)` and 8th time is `r mean(long_biomaker_df$time_8, na.rm=TRUE)`
 
 ## 5. Check whether some participants appear in only the baseline or amyloid datasets, and comment on your findings
 
