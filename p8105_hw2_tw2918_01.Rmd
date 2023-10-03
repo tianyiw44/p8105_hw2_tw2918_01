@@ -194,8 +194,8 @@ long_biomaker_df =
 * used `janitor::clean_names` to tidy variable names
 * used `mutate` to replace `basline` value "Na" to `NA`
 * used `rename` function to rename study_id to id to make it consistant with `baseline_df`
-* There were `r nrow(long_biomaker_df)` participants in this dataset
-* The average `baseline` time in years when biomaker amyloid is measured is `r mean(long_biomaker_df$baseline, na.rm=TRUE)`
+* There are `r nrow(long_biomaker_df)` participants in this dataset
+* There are `r ncol(long_biomaker_df)`variable including the `baseline` time in years when biomaker amyloid is measured, the second visit (`time_2`), fourth visit (`time_4`), sixth visit (`time_6`) and Eightth visit (`time_8`) when it is measured.
 
 ## 5. Check whether some participants appear in only the baseline or amyloid datasets, and comment on your findings
 
