@@ -212,3 +212,9 @@ mci_demographic_biomaker_df =
 * the resuiting dataset `mci_demographic_biomaker_df` contains `r nrow(mci_demographic_biomaker_df)`observations and`r ncol(mci_demographic_biomaker_df)` variables
 * The variables contains baseline character of the participants including baseline age (`current_age`), `sex`, years of `education`, wheter they carry `apoe4` and mci `age_at_onset`. It also contains biomaker amyloid measurement time at `baseline`, second, forth, sixth and eighth time visit, named as `baseline`, `time_2`, `time_4`, `time_6` and `time_8`. 
 
+## 7. export the result as a CSV to your data directory.
+
+```{r}
+write.csv(mci_demographic_biomaker_df, "./mic_demographic_biomaker.csv")
+```
+
